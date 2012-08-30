@@ -1,4 +1,6 @@
 *.py[co]
+RUN
+*.pid
 
 # Packages
 *.egg
