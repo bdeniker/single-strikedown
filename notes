@@ -1,0 +1,3 @@
+Duplicate DB locally:
+
+ssh -C nestnet@s10.wservices.ch "mysqldump -u nestnet --password nestnet" | mysql -u root -password -D nest

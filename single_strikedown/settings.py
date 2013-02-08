@@ -2,6 +2,7 @@
 # Django settings for single_strikedown project.
 
 import os.path
+import localsettings
 
 BASE_PATH = os.path.dirname(__file__)
 
@@ -17,14 +18,7 @@ ADMINS = (
 MANAGERS = ADMINS
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'nestnet',
-        'USER': 'nestnet',
-        'PASSWORD': 'kitty<3Brick',
-        'HOST': '',
-        'PORT': '',
-    }
+    'default': localsettings.db
 }
 
 # Local time zone for this installation. Choices can be found here:
@@ -96,9 +90,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
-#    'django.contrib.staticfiles',
+    'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.admindocs',
+    'south',
 )
 
 # Override the server-derived value of SCRIPT_NAME 
