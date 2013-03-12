@@ -95,6 +95,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'south',
     'single_strikedown.playerbase',
+    'reversion',
 )
 
 # Override the server-derived value of SCRIPT_NAME 

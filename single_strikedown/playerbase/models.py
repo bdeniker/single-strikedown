@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User, Group
+from model_utils.managers import InheritanceManager
 
 class Player(models.Model):
     user = models.OneToOneField(User)
@@ -11,6 +12,7 @@ class Group(models.Model):
     name = models.CharField(max_length=200)
     forum = models.URLField(blank=True) 
     moderators = models.ManyToManyField(User, related_name='moderating')
+    characters = models.ManyToManyField('Character', related_name='parties')
 
 class Character(models.Model):
 
@@ -30,7 +32,8 @@ class Character(models.Model):
     notes = models.TextField(blank=True)
     state = models.CharField(max_length=3, choices=CHARACTER_STATES)
 
+    objects = InheritanceManager()
+
 class XP(models.Model):
     character = models.ForeignKey(Character)
-    timestamp = models.DateTimeField(auto_now_add=True)
-    comment = models.CharField(max_length=500, blank=True)
+    amount = models.IntegerField()  # New amount of XP (NOT difference)
