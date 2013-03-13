@@ -5,14 +5,25 @@ from model_utils.managers import InheritanceManager
 class Player(models.Model):
     user = models.OneToOneField(User)
     name = models.CharField(max_length=200)
-    friends = models.ManyToManyField(User, blank=True, related_name='friend_of')
+    friends = models.ManyToManyField(User, blank=True, null=True,
+                                     related_name='friend_of')
+
+    def __unicode__(self):
+        if self.name == '':
+            return self.user.username
+        else:
+            return self.name
 
 class Group(models.Model):
     group = models.OneToOneField(Group, related_name='party')
     name = models.CharField(max_length=200)
     forum = models.URLField(blank=True) 
     moderators = models.ManyToManyField(User, related_name='moderating')
-    characters = models.ManyToManyField('Character', related_name='parties')
+    characters = models.ManyToManyField('Character', related_name='parties',
+                                        blank=True, null=True)
+
+    def __unicode__(self):
+        return self.name
 
 class Character(models.Model):
 
@@ -34,6 +45,16 @@ class Character(models.Model):
 
     objects = InheritanceManager()
 
+    def __unicode__(self):
+        return self.name
+
 class XP(models.Model):
-    character = models.ForeignKey(Character)
-    amount = models.IntegerField()  # New amount of XP (NOT difference)
+    character = models.OneToOneField(Character)
+    amount = models.IntegerField()  # New/total amount of XP (NOT difference)
+
+    class Meta:
+        verbose_name='XP'
+        verbose_name_plural='XP'
+
+    def __unicode__(self):
+        return self.character
