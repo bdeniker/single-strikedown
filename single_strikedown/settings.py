@@ -93,9 +93,12 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.admindocs',
+
     'south',
-    'single_strikedown.playerbase',
     'reversion',
+
+    'single_strikedown.playerbase',
+    'single_strikedown.nest',
 )
 
 # Override the server-derived value of SCRIPT_NAME 
